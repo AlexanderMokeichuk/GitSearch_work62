@@ -3,6 +3,7 @@ import axios from "axios";
 import {Repository, User} from "../../type";
 import RepositoryAlert from "../RepositoryAlert/RepositoryAlert";
 import dayjs from "dayjs";
+import Loader from "../Loader/Loader";
 
 interface Props {
   user: User;
@@ -34,25 +35,28 @@ const UserRepos: React.FC<Props> = ({user}) => {
 
 
   return (
-    <div className={"mt-4"}>
-      <div className={"row"}>
-        <div className={"col-3"}>
-          <img src={user.avatar_url} alt={"#"} className={"rounded-circle"} style={{width: 200, height: 200}}/>
-          <div className={"d-flex flex-column gap-2"}>
-            <a href={user.html_url} target="_blank" className={"fs-6 text-white link-offset-3"}>{user.login}</a>
-            <p style={{fontSize: 12}}>Create at: {dayjs(user.created_at).format("DD/MM/YYYY")}</p>
+    (repositories.length)
+      ? <div className={"mt-4"}>
+        <div className={"row"}>
+          <div className={"col-3"}>
+            <img src={user.avatar_url} alt={"#"} className={"rounded-circle"} style={{width: 200, height: 200}}/>
+            <div className={"d-flex flex-column gap-2"}>
+              <a href={user.html_url} target="_blank" className={"fs-6 text-white link-offset-3"}>{user.login}</a>
+              <p style={{fontSize: 12}}>Create at: {dayjs(user.created_at).format("DD/MM/YYYY")}</p>
+            </div>
+          </div>
+
+          <div className={"col"}>
+            {
+              repositories.map((repository) => {
+                return <RepositoryAlert key={repository.id} repository={repository}/>;
+              })
+            }
           </div>
         </div>
-
-        <div className={"col"}>
-          {
-            repositories.map((repository) => {
-              return <RepositoryAlert key={repository.id} repository={repository}/>;
-            })
-          }
-        </div>
       </div>
-    </div>
+
+      : <Loader/>
   );
 };
 

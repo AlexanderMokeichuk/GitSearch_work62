@@ -22,6 +22,7 @@ const UserSearchForm: React.FC<Props> = ({fetchData}) => {
         className={"form-control"}
         value={userName}
         onChange={changeUserName}
+        placeholder={"Login GitHub"}
       />
       <button type={"submit"} className={"btn btn-primary"}>Search</button>
     </form>
