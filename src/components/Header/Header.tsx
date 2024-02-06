@@ -3,18 +3,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NuvBar from "../NuvBar/NuvBar";
 
 interface Props {
-  userName: string;
   fetchData: (userName: string) => void;
-  changeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Header: React.FC<Props> = ({userName, fetchData, changeUserName}) => {
+const Header: React.FC<Props> = React.memo(({fetchData}) => {
 
   return (
     <header className={"bg-dark"}>
-      <NuvBar fetchData={fetchData} userName={userName} changeUserName={changeUserName}/>
+      <NuvBar fetchData={fetchData}/>
     </header>
   );
-};
+});
 
 export default Header;

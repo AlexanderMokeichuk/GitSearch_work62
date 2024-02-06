@@ -1,17 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
+import {DEFAULT_USER_NAME} from "../../constants";
 
 interface Props {
-  userName: string;
   fetchData: (userName: string) => void;
-  changeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const UserSearchForm: React.FC<Props> = ({userName, fetchData, changeUserName}) => {
+const UserSearchForm: React.FC<Props> = ({fetchData}) => {
+  const [userName, setUserName] = useState<string>(DEFAULT_USER_NAME);
+
+  const changeUserName = (e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     void fetchData(userName);
   };
+
   return (
     <form onSubmit={submit} className={"d-flex gap-3"}>
       <input

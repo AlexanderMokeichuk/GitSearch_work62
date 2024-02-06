@@ -1,8 +1,16 @@
 export interface User {
+  login: string,
+  avatar_url: string,
+  html_url: string,
+  repos_url: string,
+  created_at: string,
+  public_repos: number,
+}
+
+export interface Repository {
   id: number;
-  login: string;
-  avatar_url: string;
+  name: string;
+  language: string;
   html_url: string;
-  type: string;
-  repos_url: string;
+  visibility: string
 }
